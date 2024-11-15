@@ -35,4 +35,9 @@ export class CreateProductDto {
   @IsOptional()
   tags: string[];
 
+  @IsString({ each: true}) //cada uno de los elementos del arreglo tiene que cumplir la condicion
+  @IsArray()
+  @IsOptional()
+  images?: string[];
+
 }
