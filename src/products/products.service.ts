@@ -1,14 +1,16 @@
 import { BadRequestException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
+import {  InjectRepository } from '@nestjs/typeorm';
+
+import { DataSource, Repository } from 'typeorm';
+import { validate as isUUID} from 'uuid';
+
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { DataSource, Repository } from 'typeorm';
-import {  InjectRepository } from '@nestjs/typeorm';
 import { Product } from './entities/product.entity';
-import { PaginationDto } from 'src/common/dtos/pagination.dto';
-import { validate as isUUID} from 'uuid';
-import { title } from 'process';
+import { PaginationDto } from './../common/dtos/pagination.dto';
 import { ProductImage } from './entities/product-image.entity';
 import { User } from './../auth/entities/user.entity';
+
 
 @Injectable()
 export class ProductsService {
@@ -145,6 +147,8 @@ export class ProductsService {
     try {
 
       const product = await this.findOne(id);
+
+      if (!product) {throw new NotFoundException(`Product with id ${id} not found`)};
 
       await this.productRepository.remove(product);
 
