@@ -13,12 +13,12 @@
 docker-compose up -d
 ```
 
-6. Ejecutas SEED para llenar la base de datos
-```
-http://localhost:3000/api/seed
-```
-
-7. Ejecutar la aplicacion en mode desarrollo
+6. Ejecutar la aplicacion en mode desarrollo
 ```
 npm run start:dev
+```
+
+7. Ejecutas SEED para llenar la base de datos
+```
+http://localhost:3000/api/seed
 ```
